@@ -726,7 +726,14 @@ public abstract class Projection implements Cloneable {
   {
     this.unit = unit;
   }
-  
+
+	/**
+	 * Returns the units of the projection.
+	 */
+	public Unit getUnits() {
+		return unit;
+	}
+
 	/**
 	 * Initialize the projection. This should be called after setting parameters and before using the projection.
 	 * This is for performance reasons as initialization may be expensive.
