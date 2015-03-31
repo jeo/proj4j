@@ -27,17 +27,26 @@ public class Proj4FileReader
   	if (inStr == null) {
   		throw new IllegalStateException("Unable to access CRS file: " + filename);
   	}
-    BufferedReader reader = new BufferedReader( 
-          new InputStreamReader(inStr) );
-    String[] args;
+    
     try {
-      args = readFile(reader, name);
+      return readParameters(name, inStr);
     }
     finally {
-      if (reader != null)
-        reader.close();
+      if (inStr != null)
+        inStr.close();
     }
-    return args;
+  }
+
+  /**
+   * Reads projection parameters for the named object from the specified input stream.
+   * <p>
+   * Note: This method will not call close on <tt>input</tt>.
+   * </p> 
+   */
+  public String[] readParameters(String name, InputStream input ) 
+  throws IOException {
+      BufferedReader reader = new BufferedReader(new InputStreamReader(input));
+      return readFile(reader, name);
   }
   
   private StreamTokenizer createTokenizer(BufferedReader reader)
